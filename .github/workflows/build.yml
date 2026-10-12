@@ -23,8 +23,10 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Install dependencies
-      run: npm install
+    - name: Install Dependencies and Capacitor Packages
+      run: |
+        npm install
+        npm install @capacitor/core @capacitor/cli @capacitor/android @capacitor-community/speech-recognition @capacitor-community/text-to-speech
 
     - name: Add Android Platform
       run: npx cap add android

@@ -1,8 +1,0 @@
-{
-  "appId": "com.voiceai.app",
-  "appName": "Voice AI",
-  "webDir": "www",
-  "server": {
-    "androidScheme": "https"
-  }
-}

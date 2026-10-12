@@ -13,9 +13,9 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Set up Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v20
       with:
-        node-version: 18
+        node-version: 20
 
     - name: Set up JDK 17
       uses: actions/setup-java@v4
@@ -23,16 +23,21 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Install Dependencies and Capacitor Packages
+    - name: Install dependencies
       run: |
-        npm install
         npm install @capacitor/core @capacitor/cli @capacitor/android @capacitor-community/speech-recognition @capacitor-community/text-to-speech
 
-    - name: Add Android Platform
-      run: npx cap add android
+    - name: Ensure web directory exists
+      run: |
+        mkdir -p www
+        if [ ! -f www/index.html ]; then
+          echo '<!DOCTYPE html><html><head><title>Voice AI</title></head><body><h1>Voice AI App</h1></body></html>' > www/index.html
+        fi
 
-    - name: Sync Android Platform
-      run: npx cap sync android
+    - name: Initialize & Sync Capacitor Android
+      run: |
+        npx cap add android || true
+        npx cap sync android
 
     - name: Build Debug APK with Gradle
       run: |

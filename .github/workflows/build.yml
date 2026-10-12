@@ -26,10 +26,8 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Initialize Capacitor and Add Android
-      run: |
-        npx cap init "Voice AI" "com.voiceai.app" --web-dir www --yes || true
-        npx cap add android
+    - name: Add Android Platform
+      run: npx cap add android
 
     - name: Sync Android Platform
       run: npx cap sync android

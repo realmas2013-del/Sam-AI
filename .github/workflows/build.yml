@@ -12,14 +12,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Extract zip if present
-      run: |
-        if [ -f voice-ai-app.zip ]; then
-          unzip -o voice-ai-app.zip -d extracted_app
-          cp -r extracted_app/* .
-          rm -rf extracted_app
-        fi
-
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
@@ -34,10 +26,14 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Add Android platform and Sync
-      run: |
-        npx cap add android || true
-        npx cap sync android
+    - name: Ensure web assets folder exists
+      run: mkdir -p www
+
+    - name: Add Android platform
+      run: npx cap add android
+
+    - name: Sync Capacitor assets
+      run: npx cap sync android
 
     - name: Build Debug APK with Gradle
       run: |

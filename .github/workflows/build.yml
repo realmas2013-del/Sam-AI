@@ -25,7 +25,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        npm install @capacitor/core @capacitor/cli @capacitor/android @capacitor-community/speech-recognition @capacitor-community/text-to-speech
+        npm install @capacitor/core@^6 @capacitor/cli@^6 @capacitor/android@^6 @capacitor-community/speech-recognition@^6 @capacitor-community/text-to-speech@^6
 
     - name: Ensure web directory exists
       run: |

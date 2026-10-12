@@ -2,5 +2,15 @@
   "name": "voice-ai-app",
   "version": "1.0.0",
   "private": true,
-  "description": "Voice AI Android app"
+  "description": "Voice AI Android app",
+  "scripts": {
+    "build": "echo 'No build step required for web assets'"
+  },
+  "dependencies": {
+    "@capacitor/android": "^5.0.0",
+    "@capacitor/cli": "^5.0.0",
+    "@capacitor/core": "^5.0.0",
+    "@capacitor-community/speech-recognition": "^5.0.0",
+    "@capacitor-community/text-to-speech": "^5.0.0"
+  }
 }

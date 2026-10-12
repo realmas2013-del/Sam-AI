@@ -3,6 +3,7 @@ name: Build APK
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -10,6 +11,14 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+
+    - name: Extract zip if present
+      run: |
+        if [ -f voice-ai-app.zip ]; then
+          unzip -o voice-ai-app.zip -d extracted_app
+          cp -r extracted_app/* .
+          rm -rf extracted_app
+        fi
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
@@ -22,12 +31,10 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Install dependencies & build web assets
-      run: |
-        npm install
-        npm run build || true
+    - name: Install dependencies
+      run: npm install
 
-    - name: Add Android platform (Capacitor)
+    - name: Add Android platform and Sync
       run: |
         npx cap add android || true
         npx cap sync android
